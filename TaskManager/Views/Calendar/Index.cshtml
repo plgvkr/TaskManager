@@ -1,0 +1,59 @@
+﻿@model TaskManager.ViewModels.Calendar
+
+@{
+    ViewData["Title"] = "Calendar";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+
+<body>
+    <div align="center">
+        <p>@Model.Context.ViewMonth @Model.Context.Year</p>
+        <table border="1" align="center" cellpadding="3" height="80%" width="100%" table-layout="fixed">
+            <tr align="center" width="10%" height="20%">
+                <td width="10%">Monday</td>
+                <td width="10%">Tuesday</td>
+                <td width="10%">Wednesday</td>
+                <td width="10%">Thursday</td>
+                <td width="10%">Friday</td>
+                <td width="10%">Saturday</td>
+                <td width="10%">Sunday</td>
+            </tr>
+
+            @for (int i = 0; i < Model.Days.Count / 7; ++i)
+            {
+                <tr>
+                    @for (int j = i * 7; j < (i + 1) * 7; ++j)
+                    {
+                        if (Model.Days[j] == 0)
+                        {
+                            <td></td>
+                        }
+                        else if (Model.Days[j] == Model.Context.ViewToday)
+                        {
+                            <td bgcolor="#ffc4b8">@Model.Days[j]</td>
+                        }
+                        else
+                        {
+                            <td>@Model.Days[j]</td>
+                        }
+
+                    }
+                </tr>
+            }
+
+        </table>
+
+        <div class="l">
+            <a asp-action="Index" asp-route-shiftMonth="@(Model.Context.ShiftMonth - 1)">Prev</a>
+
+        </div>
+        <div class="r">
+            <a asp-action="Index" asp-route-shiftMonth="@(Model.Context.ShiftMonth + 1)">Next</a>
+        </div>
+
+
+    </div>
+</body>
