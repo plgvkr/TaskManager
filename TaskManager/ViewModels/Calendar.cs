@@ -24,6 +24,7 @@
 
     public class CalendarContext
     {
+        public DateTime Date { get; set; }
         public int Year { get; set; }        
         public string ViewMonth { get; set; }
         public int ViewToday { get; set; }
@@ -34,12 +35,12 @@
         public CalendarContext(int shiftMonth)
         {
             ShiftMonth = shiftMonth;
-            var date = DateTime.Now.AddMonths(shiftMonth);
-            Year = date.Year;
-            var month = date.Month;
-            ViewMonth = date.ToString("MMMM");
+            Date = DateTime.Now.AddMonths(shiftMonth);
+            Year = Date.Year;
+            var month = Date.Month;
+            ViewMonth = Date.ToString("MMMM", new System.Globalization.CultureInfo("en-US"));
 
-            ViewToday = month == DateTime.Now.Month ? date.Day : -1;
+            ViewToday = month == DateTime.Now.Month ? Date.Day : -1;
 
             DaysInMonth = DateTime.DaysInMonth(Year, month);
 

@@ -33,11 +33,17 @@
                         }
                         else if (Model.Days[j] == Model.Context.ViewToday)
                         {
-                            <td bgcolor="#ffc4b8">@Model.Days[j]</td>
+                            <td>
+                                <input class="filltd" style="background-color: #ffc4b8" type="button" value=@Model.Days[j]
+                                onclick="location.href='@Url.Action("Index", "ScheduledTask", new {date = Model.Context.Date, day = Model.Days[j]})'" />
+                            </td>
                         }
                         else
                         {
-                            <td>@Model.Days[j]</td>
+                            <td>
+                                <input class="filltd" type="button" value=@Model.Days[j]
+                                onclick="location.href='@Url.Action("Index", "ScheduledTask", new {date = Model.Context.Date, day = Model.Days[j]})'" />
+                            </td>
                         }
 
                     }

@@ -16,3 +16,17 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.l {
+    float: left;
+}
+
+.r {
+    float: right;
+}
+
+.filltd {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
