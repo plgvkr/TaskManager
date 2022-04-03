@@ -1,6 +1,19 @@
-﻿<head>
+﻿@model TaskManager.ViewModels.TaskData
+
+
+<head>
 
 </head>
+
 <body>
-    <p>Hello task</p>
+    <p>All tasks</p>
+    @foreach(var task in Model.scheduledTasks)
+    {
+        <p>@task.Name</p>
+    }
+
+    @foreach(var task in Model.repeatScheduledTasks)
+    {
+        <p>@task.Name</p>
+    }
 </body>

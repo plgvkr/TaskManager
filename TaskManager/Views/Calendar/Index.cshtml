@@ -35,14 +35,14 @@
                         {
                             <td>
                                 <input class="filltd" style="background-color: #ffc4b8" type="button" value=@Model.Days[j]
-                                onclick="location.href='@Url.Action("Index", "ScheduledTask", new {date = Model.Context.Date, day = Model.Days[j]})'" />
+                                onclick="location.href='@Url.Action("TaskOnDay", "ScheduledTask", new {date = Model.Context.Date, day = Model.Days[j]})'" />
                             </td>
                         }
                         else
                         {
                             <td>
                                 <input class="filltd" type="button" value=@Model.Days[j]
-                                onclick="location.href='@Url.Action("Index", "ScheduledTask", new {date = Model.Context.Date, day = Model.Days[j]})'" />
+                                onclick="location.href='@Url.Action("TaskOnDay", "ScheduledTask", new {date = Model.Context.Date, day = Model.Days[j]})'" />
                             </td>
                         }
 
