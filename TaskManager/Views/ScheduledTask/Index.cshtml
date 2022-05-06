@@ -1,19 +1,24 @@
-﻿@model TaskManager.ViewModels.TaskData
-
+﻿@model List<ScheduledTask>
 
 <head>
 
 </head>
 
 <body>
+
+    <a asp-action="Create">Create New Task</a>
+
     <p>All tasks</p>
-    @foreach(var task in Model.scheduledTasks)
+
+    @if (Model.Count == 0)
+    {
+        <p>You have no tasks</p>
+    }
+    @foreach(var task in Model)
     {
         <p>@task.Name</p>
+        <p>@task.Description</p>        
     }
 
-    @foreach(var task in Model.repeatScheduledTasks)
-    {
-        <p>@task.Name</p>
-    }
+    
 </body>

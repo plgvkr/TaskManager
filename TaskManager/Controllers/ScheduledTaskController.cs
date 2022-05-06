@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using TaskManager.Data;
 using TaskManager.Models;
-using TaskManager.ViewModels;
 
 namespace TaskManager.Controllers
 {
@@ -14,23 +14,39 @@ namespace TaskManager.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<ActionResult> Index()
         {
-            var scheduledTasks = _context.ScheduledTasks.ToList();
-            var repeatScheduledTasks = _context.RepeatScheduledTasks.ToList();
+            var scheduledTasks = await _context.ScheduledTasks.ToListAsync();
 
-            var data = new TaskData() { scheduledTasks = scheduledTasks, repeatScheduledTasks = repeatScheduledTasks };
-
-            return View(data);
-            
+            return View(scheduledTasks);
         }
 
+        [HttpGet]
         public IActionResult TaskOnDay(DateTime date, int day)
         {
             DateTime dateTime = date.AddDays(day - date.Day);
             dateTime = dateTime.Date;
 
-            return View(dateTime);
+            //todo: find RepeatTypeTask
+            var scheduledTaskForDay = _context.ScheduledTasks.Where(task => DateTime.Compare(dateTime, task.DateTime) == 0);
+
+            return View(scheduledTaskForDay);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(ScheduledTask scheduledTask)
+        {
+            _context.ScheduledTasks.Add(scheduledTask);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+        
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
     }
 }

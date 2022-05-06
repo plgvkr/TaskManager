@@ -1,9 +1,20 @@
-﻿@model DateTime
+﻿@model IQueryable<ScheduledTask>
 
 <head>
 
 </head>
 
+@*todo:View all info about tasks and add button 'CreateTask'*@
 <body>
-    <p>Task for day @Model.Day @Model.Date.ToString("MMMM", new System.Globalization.CultureInfo("en-US")) @Model.Year</p>
+    @if (Model.Count() == 0)
+    {
+        <p>No task for this day</p>
+    }
+
+    @foreach (var task in Model)
+    {
+        <p>Task</p>
+        <p>@task.Name</p>
+        <p>@task.Description</p>
+    }
 </body>
