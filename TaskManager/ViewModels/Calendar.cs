@@ -36,6 +36,7 @@
         {
             ShiftMonth = shiftMonth;
             Date = DateTime.Now.AddMonths(shiftMonth);
+            Date = Date.Date;
             Year = Date.Year;
             var month = Date.Month;
             ViewMonth = Date.ToString("MMMM", new System.Globalization.CultureInfo("en-US"));

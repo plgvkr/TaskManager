@@ -16,9 +16,13 @@
     }
     @foreach(var task in Model)
     {
+        <p>@task.Id</p>
         <p>@task.Name</p>
-        <p>@task.Description</p>        
+        <p>@task.Description</p>
+        
+        <form asp-controller="ScheduledTask" asp-action="Delete" asp-route-id="@task.Id">
+            <button type="submit">delete</button>
+        </form>
     }
-
     
 </body>

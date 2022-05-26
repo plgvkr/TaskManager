@@ -41,12 +41,26 @@ namespace TaskManager.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var deleted = _context.ScheduledTasks.Where(_task => _task.Id == id).FirstOrDefault();
+
+            if (deleted != null)
+            {
+                _context.ScheduledTasks.Remove(deleted);
+            }
+
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
         
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
-
     }
 }

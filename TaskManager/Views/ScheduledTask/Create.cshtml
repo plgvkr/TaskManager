@@ -12,9 +12,8 @@
     <p>Form for create task</p>
 
     <form method="post" asp-antiforgery=true>
-        <p>
-            <label asp-for="Id">Id</label>
-            <input type="number" asp-for=Id />
+        <p>           
+            <input type="hidden" asp-for=Id />
         </p>
 
         <p>
@@ -29,7 +28,7 @@
 
         <p>
             <label asp-for="DateTime">DateTime</label>
-            <input type="datetime" asp-for=DateTime />
+            <input type="date" asp-for=DateTime />
         </p>
 
         <p>
@@ -44,7 +43,7 @@
 
         <p>
             <label asp-for="DayOfWeek">DayOfWeek</label>
-            <input type="number" asp-for=DayOfWeek />
+            <input type="week" asp-for=DayOfWeek />
         </p>
 
         <p>
