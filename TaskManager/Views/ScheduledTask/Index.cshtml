@@ -16,9 +16,20 @@
     }
     @foreach(var task in Model)
     {
+        <p>Id</p>
         <p>@task.Id</p>
+        <p>Name</p>
         <p>@task.Name</p>
+        <p>Description</p>
         <p>@task.Description</p>
+        <p>IsRepeated</p>
+        <p>@task.IsRepeated</p>
+        <p>IsCompleted</p>
+        <p>@task.IsCompleted</p>
+        <p>RepeatType</p>
+        <p>@task.RepeatType</p>
+        <p>DayOfWeek</p>
+        <p>@task.DayOfWeek</p>
         
         <form asp-controller="ScheduledTask" asp-action="Delete" asp-route-id="@task.Id">
             <button type="submit">delete</button>

@@ -8,7 +8,6 @@ namespace TaskManager.Controllers
     public class ScheduledTaskController : Controller
     {
         private readonly ApplicationContext _context;
-
         public ScheduledTaskController(ApplicationContext context)
         {
             _context = context;
@@ -28,10 +27,21 @@ namespace TaskManager.Controllers
             DateTime dateTime = date.AddDays(day - date.Day);
             dateTime = dateTime.Date;
 
-            //todo: find RepeatTypeTask
-            var scheduledTaskForDay = _context.ScheduledTasks.Where(task => DateTime.Compare(dateTime, task.DateTime) == 0);
+            var scheduledTasks = new List<ScheduledTask>();
 
-            return View(scheduledTaskForDay);
+            var scheduledTaskForDay = _context.ScheduledTasks.Where(task => DateTime.Compare(dateTime, task.DateTime) == 0);
+            var scheduledTaskEveryDay = _context.ScheduledTasks.Where(task => task.RepeatType == RepeatType.EveryDay);
+            var scheduledTaskEveryWeek = _context.ScheduledTasks.Where(task => task.RepeatType == RepeatType.EveryWeek && task.DayOfWeek == dateTime.DayOfWeek);
+            var scheduledTaskEveryMonth = _context.ScheduledTasks.Where(task => task.RepeatType == RepeatType.EveryMonth && task.DateTime.Day == dateTime.Day);
+            var scheduledTaskEveryYear = _context.ScheduledTasks.Where(task => task.RepeatType == RepeatType.EveryYear && task.DateTime.DayOfYear == dateTime.DayOfYear);
+
+            scheduledTasks.AddRange(scheduledTaskForDay);
+            scheduledTasks.AddRange(scheduledTaskEveryDay);
+            scheduledTasks.AddRange(scheduledTaskEveryWeek);
+            scheduledTasks.AddRange(scheduledTaskEveryMonth);
+            scheduledTasks.AddRange(scheduledTaskEveryYear);
+
+            return View(scheduledTasks);
         }
 
         [HttpPost]

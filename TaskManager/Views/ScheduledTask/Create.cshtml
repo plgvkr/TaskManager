@@ -7,7 +7,6 @@
 
 </head>
 
-@*Todo: DateTime choice only date. DayOfWeek calculate automatic. RepeatType use SelectList.*@
 <body>
     <p>Form for create task</p>
 
@@ -43,12 +42,28 @@
 
         <p>
             <label asp-for="DayOfWeek">DayOfWeek</label>
-            <input type="week" asp-for=DayOfWeek />
+            <select name="DayOfWeek" asp-for=DayOfWeek>
+                <option value="">Select a weekday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="0">Sunday</option>
+            </select>
         </p>
 
         <p>
             <label asp-for="RepeatType">RepeatType</label>
-            <input type="number" asp-for=RepeatType />
+            <select name="RepeatType" asp-for=RepeatType>
+                <option value="">Select a repeat type</option>
+                <option value="0">Every day</option>
+                <option value="1">Every week</option>
+                <option value="2">Every month</option>
+                <option value="3">Every year</option>
+            </select>
+
         </p>
 
         <input type="submit" value="Create" />
